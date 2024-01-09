@@ -12,6 +12,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -36,6 +37,10 @@ public class Airline {
     )
 	@JsonIgnore
 	private List<Employee> employees;
+	
+	@OneToMany(mappedBy="airline")
+	@JsonIgnore
+	private List<Flight> flights;
 	
 	
 	public Airline() {}
@@ -75,6 +80,14 @@ public class Airline {
 
 	public void setEmployees(List<Employee> employees) {
 		this.employees = employees;
+	}
+
+	public List<Flight> getFlights() {
+		return flights;
+	}
+
+	public void setFlights(List<Flight> flights) {
+		this.flights = flights;
 	}
 
 	@Override

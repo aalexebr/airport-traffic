@@ -1,9 +1,14 @@
 package org.java.spring.pojo.db;
 
+import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -19,6 +24,10 @@ public class Airplane {
 	private String model;
 	
 	private Long seating_capacity;
+	
+	@OneToMany(mappedBy="airplane")
+	@JsonIgnore
+	private List<Flight> flights;
 	
 	public Airplane() {}
 	public Airplane(String manufacturer,String model, Long seating_capacity) {
@@ -57,6 +66,14 @@ public class Airplane {
 
 	public void setSeating_capacity(Long seating_capacity) {
 		this.seating_capacity = seating_capacity;
+	}
+	
+	public List<Flight> getFlights() {
+		return flights;
+	}
+	
+	public void setFlights(List<Flight> flights) {
+		this.flights = flights;
 	}
 	
 	

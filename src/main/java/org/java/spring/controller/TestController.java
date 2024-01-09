@@ -6,10 +6,12 @@ import org.java.spring.pojo.db.Airline;
 import org.java.spring.pojo.db.AirlineEmployee;
 import org.java.spring.pojo.db.Airplane;
 import org.java.spring.pojo.db.Employee;
+import org.java.spring.pojo.db.Flight;
 import org.java.spring.pojo.service.AirlineEmployeeService;
 import org.java.spring.pojo.service.AirlineService;
 import org.java.spring.pojo.service.AirplaneService;
 import org.java.spring.pojo.service.EmployeeService;
+import org.java.spring.pojo.service.FlightService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -32,6 +34,9 @@ public class TestController {
 	
 	@Autowired
 	AirplaneService airplaneServ;
+	
+	@Autowired
+	FlightService flightService;
 
 	@GetMapping("airline_employee")
 	public ResponseEntity<List<AirlineEmployee>> getPivot(){
@@ -69,6 +74,14 @@ public class TestController {
 	public ResponseEntity<Airplane> getAirplane(){
 		
 		Airplane a = airplaneServ.findById(1);
+		
+		return new ResponseEntity<>(a, HttpStatus.OK);
+	}
+	
+	@GetMapping("flight")
+	public ResponseEntity<Flight> getFlight(){
+		
+		Flight a = flightService.findById(1);
 		
 		return new ResponseEntity<>(a, HttpStatus.OK);
 	}
