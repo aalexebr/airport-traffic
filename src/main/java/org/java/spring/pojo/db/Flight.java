@@ -2,10 +2,14 @@ package org.java.spring.pojo.db;
 
 import java.time.LocalDate;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
@@ -28,6 +32,16 @@ public class Flight {
 	
 	@ManyToOne
 	private Airline airline;
+	
+	@ManyToOne
+    @JoinColumn(name = "departure_airport_id")
+	@JsonProperty
+    private Airport departureAirport;
+
+    @ManyToOne
+    @JoinColumn(name = "arrival_airport_id")
+    @JsonProperty
+    private Airport arrivalAirport;
 	
 	public Flight() {}
 
@@ -78,6 +92,23 @@ public class Flight {
 	public void setAirline(Airline airline) {
 		this.airline = airline;
 	}
+
+	public Airport getDepartureAirport() {
+		return departureAirport;
+	}
+
+	public void setDepartureAirport(Airport departureAirport) {
+		this.departureAirport = departureAirport;
+	}
+
+	public Airport getArrivalAirport() {
+		return arrivalAirport;
+	}
+
+	public void setArrivalAirport(Airport arrivalAirport) {
+		this.arrivalAirport = arrivalAirport;
+	}
+	
 	
 	
 
