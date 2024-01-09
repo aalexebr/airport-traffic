@@ -1,6 +1,11 @@
 package org.java.spring.controller;
 
+import java.util.List;
+
 import org.java.spring.pojo.db.Airline;
+import org.java.spring.pojo.db.AirlineEmployee;
+import org.java.spring.pojo.db.Employee;
+import org.java.spring.pojo.service.AirlineEmployeeService;
 import org.java.spring.pojo.service.AirlineService;
 import org.java.spring.pojo.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,16 +24,19 @@ public class TestController {
 	
 	@Autowired
 	AirlineService airlineServ;
+	
+	@Autowired
+	AirlineEmployeeService AEService;
 
 	@GetMapping
-	public ResponseEntity<Airline> getTest(){
+	public ResponseEntity<List<AirlineEmployee>> getTest(){
 		
 		Airline a = new Airline("xxx","testAiline");
 		
-		airlineServ.save(a);
+		Employee x = empServ.findById(1);
 		
-		Airline x = airlineServ.findByName("testAiline");
+		List<AirlineEmployee> n = AEService.findByEmployeeId(1);
 		
-		return new ResponseEntity<>(x, HttpStatus.OK);
+		return new ResponseEntity<>(n, HttpStatus.OK);
 	}
 }
