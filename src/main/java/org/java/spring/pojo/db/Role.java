@@ -9,39 +9,27 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.JoinTable;
-import jakarta.persistence.ManyToMany;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "airlines")
-public class Airline {
+@Table(name = "roles")
+public class Role {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	
 	@Column(nullable = false, unique = true)
-	private String code;
-	
-	@Column(nullable = false)
 	private String name;
 	
-	@ManyToMany
-	@JoinTable(
-            name = "airline_employee",
-            joinColumns = @JoinColumn(name = "airline_id"),
-            inverseJoinColumns = @JoinColumn(name = "employee_id")
-    )
+	@OneToMany(mappedBy = "role")
 	@JsonIgnore
 	private List<Employee> employees;
 	
+	public Role() {}
 	
-	public Airline() {}
-	
-	public Airline(String code, String name) {
-		setCode(code);
+	public Role(String name) {
 		setName(name);
 	}
 
@@ -53,14 +41,6 @@ public class Airline {
 		this.id = id;
 	}
 
-	public String getCode() {
-		return code;
-	}
-
-	public void setCode(String code) {
-		this.code = code;
-	}
-
 	public String getName() {
 		return name;
 	}
@@ -68,7 +48,7 @@ public class Airline {
 	public void setName(String name) {
 		this.name = name;
 	}
-	
+
 	public List<Employee> getEmployees() {
 		return employees;
 	}
@@ -76,10 +56,10 @@ public class Airline {
 	public void setEmployees(List<Employee> employees) {
 		this.employees = employees;
 	}
-
+	
 	@Override
 	public String toString() {
+
 		return getName();
 	}
-
 }

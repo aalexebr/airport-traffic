@@ -20,5 +20,21 @@ public class AirlineService {
 	public Airline findById(int id) {
 		return airlineRepo.findById(id).orElse(null);
 	}
+	
+	public void save(Airline airline) {
+		airlineRepo.save(airline);
+	}
+	
+	public void delete(Airline airline) {
+		airlineRepo.delete(airline);
+	}
+	
+	public void deleteById(int id) {
+		airlineRepo.deleteById(id);
+	}
+	
+	public Airline findByName(String name) {
+		return airlineRepo.findByName(name);
+	}
 
 }

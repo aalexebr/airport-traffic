@@ -2,9 +2,6 @@ package org.java.spring.pojo.db;
 
 import java.util.List;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
-import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -12,37 +9,38 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "airlines")
-public class Airline {
+@Table(name = "employees")
+public class Employee {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	
-	@Column(nullable = false, unique = true)
-	private String code;
-	
-	@Column(nullable = false)
 	private String name;
 	
+	private String lastname;
+	
+	@ManyToOne
+	private Role role;
+	
 	@ManyToMany
-	@JoinTable(
+    @JoinTable(
             name = "airline_employee",
-            joinColumns = @JoinColumn(name = "airline_id"),
-            inverseJoinColumns = @JoinColumn(name = "employee_id")
+            joinColumns = @JoinColumn(name = "employee_id"),
+            inverseJoinColumns = @JoinColumn(name = "airline_id")
     )
-	@JsonIgnore
-	private List<Employee> employees;
+	private List<Airline> airlines;
 	
+	public Employee() {}
 	
-	public Airline() {}
-	
-	public Airline(String code, String name) {
-		setCode(code);
-		setName(name);
+	public Employee(String name, String lastname) {
+		setLastname(lastname);
+		setName(lastname);
+		setRole(role);
 	}
 
 	public Integer getId() {
@@ -53,14 +51,6 @@ public class Airline {
 		this.id = id;
 	}
 
-	public String getCode() {
-		return code;
-	}
-
-	public void setCode(String code) {
-		this.code = code;
-	}
-
 	public String getName() {
 		return name;
 	}
@@ -68,18 +58,27 @@ public class Airline {
 	public void setName(String name) {
 		this.name = name;
 	}
-	
-	public List<Employee> getEmployees() {
-		return employees;
+
+	public String getLastname() {
+		return lastname;
 	}
 
-	public void setEmployees(List<Employee> employees) {
-		this.employees = employees;
+	public void setLastname(String lastname) {
+		this.lastname = lastname;
+	}
+	
+	public Role getRole() {
+		return role;
+	}
+
+	public void setRole(Role role) {
+		this.role = role;
 	}
 
 	@Override
 	public String toString() {
-		return getName();
+		// TODO Auto-generated method stub
+		return getName() + " " + getLastname();
 	}
 
 }
