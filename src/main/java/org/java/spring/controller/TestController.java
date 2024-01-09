@@ -4,9 +4,11 @@ import java.util.List;
 
 import org.java.spring.pojo.db.Airline;
 import org.java.spring.pojo.db.AirlineEmployee;
+import org.java.spring.pojo.db.Airplane;
 import org.java.spring.pojo.db.Employee;
 import org.java.spring.pojo.service.AirlineEmployeeService;
 import org.java.spring.pojo.service.AirlineService;
+import org.java.spring.pojo.service.AirplaneService;
 import org.java.spring.pojo.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -27,16 +29,47 @@ public class TestController {
 	
 	@Autowired
 	AirlineEmployeeService AEService;
+	
+	@Autowired
+	AirplaneService airplaneServ;
 
-	@GetMapping
-	public ResponseEntity<List<AirlineEmployee>> getTest(){
+	@GetMapping("airline_employee")
+	public ResponseEntity<List<AirlineEmployee>> getPivot(){
 		
-		Airline a = new Airline("xxx","testAiline");
+		List<AirlineEmployee> n = AEService.findCurrent(1);
 		
-		Employee x = empServ.findById(1);
+		return new ResponseEntity<>(n, HttpStatus.OK);
+	}
+	
+	@GetMapping("airline-employee-history")
+	public ResponseEntity<List<AirlineEmployee>> getHistory(){
 		
 		List<AirlineEmployee> n = AEService.findByEmployeeId(1);
 		
 		return new ResponseEntity<>(n, HttpStatus.OK);
+	}
+	
+	@GetMapping("airline")
+	public ResponseEntity<Airline> getAirline(){
+		
+		Airline a = airlineServ.findById(2);
+		
+		return new ResponseEntity<>(a, HttpStatus.OK);
+	}
+	
+	@GetMapping("employee")
+	public ResponseEntity<Employee> getEmployee(){
+		
+		Employee a = empServ.findById(2);
+		
+		return new ResponseEntity<>(a, HttpStatus.OK);
+	}
+	
+	@GetMapping("airplane")
+	public ResponseEntity<Airplane> getAirplane(){
+		
+		Airplane a = airplaneServ.findById(1);
+		
+		return new ResponseEntity<>(a, HttpStatus.OK);
 	}
 }
