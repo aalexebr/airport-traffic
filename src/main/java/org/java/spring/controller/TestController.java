@@ -49,7 +49,7 @@ public class TestController {
 	PassengerDocumentService passDocService;
 
 	@GetMapping("airline_employee")
-	public ResponseEntity<List<AirlineEmployee>> getPivot(){
+	public ResponseEntity<List<AirlineEmployee>> getCurrentAirlineforEmployeeId(){
 		
 		List<AirlineEmployee> n = AEService.findCurrent(1);
 		
@@ -57,7 +57,7 @@ public class TestController {
 	}
 	
 	@GetMapping("airline-employee-history")
-	public ResponseEntity<List<AirlineEmployee>> getHistory(){
+	public ResponseEntity<List<AirlineEmployee>> getHistoryofAirlinesForEmployeeId(){
 		
 		List<AirlineEmployee> n = AEService.findByEmployeeId(1);
 		

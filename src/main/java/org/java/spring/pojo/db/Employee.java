@@ -36,6 +36,7 @@ public class Employee {
             joinColumns = @JoinColumn(name = "employee_id"),
             inverseJoinColumns = @JoinColumn(name = "airline_id")
     )
+	@JsonIgnore
 	private List<Airline> airlines;
 	
 	@ManyToMany(mappedBy = "employees")
@@ -80,6 +81,24 @@ public class Employee {
 
 	public void setRole(Role role) {
 		this.role = role;
+	}
+	
+	
+
+	public List<Airline> getAirlines() {
+		return airlines;
+	}
+
+	public void setAirlines(List<Airline> airlines) {
+		this.airlines = airlines;
+	}
+
+	public List<Flight> getFlights() {
+		return flights;
+	}
+
+	public void setFlights(List<Flight> flights) {
+		this.flights = flights;
 	}
 
 	@Override
