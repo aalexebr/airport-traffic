@@ -8,11 +8,13 @@ import org.java.spring.pojo.db.Airplane;
 import org.java.spring.pojo.db.Employee;
 import org.java.spring.pojo.db.Flight;
 import org.java.spring.pojo.db.Passenger;
+import org.java.spring.pojo.db.PassengerDocument;
 import org.java.spring.pojo.service.AirlineEmployeeService;
 import org.java.spring.pojo.service.AirlineService;
 import org.java.spring.pojo.service.AirplaneService;
 import org.java.spring.pojo.service.EmployeeService;
 import org.java.spring.pojo.service.FlightService;
+import org.java.spring.pojo.service.PassengerDocumentService;
 import org.java.spring.pojo.service.PassengerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -42,6 +44,9 @@ public class TestController {
 	
 	@Autowired 
 	PassengerService passengerServ;
+	
+	@Autowired
+	PassengerDocumentService passDocService;
 
 	@GetMapping("airline_employee")
 	public ResponseEntity<List<AirlineEmployee>> getPivot(){
@@ -102,7 +107,7 @@ public class TestController {
 	@GetMapping("passenger")
 	public ResponseEntity<Passenger> getPassenger(){
 		
-		Passenger a = passengerServ.findById(1);
+		Passenger a = passengerServ.findById(2);
 		
 		return new ResponseEntity<>(a, HttpStatus.OK);
 	}
@@ -111,6 +116,14 @@ public class TestController {
 	public ResponseEntity<List<Passenger>> getFlightPassengers(){
 		
 		List<Passenger> a = flightService.getFlightPassengers(1);
+		
+		return new ResponseEntity<>(a, HttpStatus.OK);
+	}
+	
+	@GetMapping("passenger-document")
+	public ResponseEntity<List<PassengerDocument>> getPassemgerDocument(){
+		
+		List<PassengerDocument> a = passDocService.findDocumentsOfPassengerById(2);
 		
 		return new ResponseEntity<>(a, HttpStatus.OK);
 	}

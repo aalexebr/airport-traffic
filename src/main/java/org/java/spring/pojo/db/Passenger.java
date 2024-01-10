@@ -10,6 +10,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
 
@@ -34,6 +35,15 @@ public class Passenger {
 	@ManyToMany(mappedBy = "passengers")
 	@JsonIgnore
 	private List<Flight> flights;
+	
+	@ManyToMany
+	@JoinTable(
+            name = "document_type_passenger",
+            joinColumns = @JoinColumn(name = "passenger_id"),
+            inverseJoinColumns = @JoinColumn(name = "document_type_id")
+    )
+	@JsonIgnore
+	private List<DocumentType> documentTypes;
 	
 	public Passenger() {}
 
@@ -83,6 +93,14 @@ public class Passenger {
 
 	public void setFlights(List<Flight> flights) {
 		this.flights = flights;
+	}
+
+	public List<DocumentType> getDocumentTypes() {
+		return documentTypes;
+	}
+
+	public void setDocumentTypes(List<DocumentType> documentTypes) {
+		this.documentTypes = documentTypes;
 	}
 	
 	
