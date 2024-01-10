@@ -1,15 +1,19 @@
 package org.java.spring.pojo.db;
 
 import java.time.LocalDate;
+import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
@@ -42,6 +46,24 @@ public class Flight {
     @JoinColumn(name = "arrival_airport_id")
     @JsonProperty
     private Airport arrivalAirport;
+    
+    @ManyToMany
+    @JoinTable(
+            name = "employee_flight",
+            joinColumns = @JoinColumn(name = "flight_id"),
+            inverseJoinColumns = @JoinColumn(name = "employee_id")
+    )
+    @JsonIgnore
+    private List<Employee> employees;
+    
+    @ManyToMany
+    @JoinTable(
+            name = "flight_passenger",
+            joinColumns = @JoinColumn(name = "flight_id"),
+            inverseJoinColumns = @JoinColumn(name = "passenger_id")
+    )
+    @JsonIgnore
+    private List<Passenger> passengers;
 	
 	public Flight() {}
 
@@ -107,6 +129,22 @@ public class Flight {
 
 	public void setArrivalAirport(Airport arrivalAirport) {
 		this.arrivalAirport = arrivalAirport;
+	}
+
+	public List<Employee> getEmployees() {
+		return employees;
+	}
+
+	public void setEmployees(List<Employee> employees) {
+		this.employees = employees;
+	}
+
+	public List<Passenger> getPassengers() {
+		return passengers;
+	}
+
+	public void setPassengers(List<Passenger> passengers) {
+		this.passengers = passengers;
 	}
 	
 	

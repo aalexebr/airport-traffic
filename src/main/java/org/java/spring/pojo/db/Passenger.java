@@ -1,23 +1,21 @@
 package org.java.spring.pojo.db;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonProperty;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
-import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "employees")
-public class Employee {
+@Table(name = "passengers")
+public class Passenger {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -27,28 +25,17 @@ public class Employee {
 	
 	private String lastname;
 	
-	@ManyToOne
-	private Role role;
+	@JoinColumn(name = "date_of_birth")
+	private LocalDate dateOfBirth;
 	
-	@ManyToMany
-    @JoinTable(
-            name = "airline_employee",
-            joinColumns = @JoinColumn(name = "employee_id"),
-            inverseJoinColumns = @JoinColumn(name = "airline_id")
-    )
-	private List<Airline> airlines;
+	@JoinColumn(name = "tax_code")
+	private String taxCode;
 	
-	@ManyToMany(mappedBy = "employees")
+	@ManyToMany(mappedBy = "passengers")
 	@JsonIgnore
 	private List<Flight> flights;
 	
-	public Employee() {}
-	
-	public Employee(String name, String lastname) {
-		setLastname(lastname);
-		setName(lastname);
-		setRole(role);
-	}
+	public Passenger() {}
 
 	public Integer getId() {
 		return id;
@@ -73,19 +60,31 @@ public class Employee {
 	public void setLastname(String lastname) {
 		this.lastname = lastname;
 	}
+
+	public LocalDate getDateOfBirth() {
+		return dateOfBirth;
+	}
+
+	public void setDateOfBirth(LocalDate dateOfBirth) {
+		this.dateOfBirth = dateOfBirth;
+	}
+
+	public String getTaxCode() {
+		return taxCode;
+	}
+
+	public void setTaxCode(String taxCode) {
+		this.taxCode = taxCode;
+	}
+
+	public List<Flight> getFlights() {
+		return flights;
+	}
+
+	public void setFlights(List<Flight> flights) {
+		this.flights = flights;
+	}
 	
-	public Role getRole() {
-		return role;
-	}
-
-	public void setRole(Role role) {
-		this.role = role;
-	}
-
-	@Override
-	public String toString() {
-		// TODO Auto-generated method stub
-		return getName() + " " + getLastname();
-	}
+	
 
 }
