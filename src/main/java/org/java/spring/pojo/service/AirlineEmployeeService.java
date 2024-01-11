@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.java.spring.pojo.db.AirlineEmployee;
 import org.java.spring.pojo.repo.AirlineEmployeeRepository;
+import org.java.spring.pojo.restDTO.AirlineEmployeeDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -16,12 +17,14 @@ public class AirlineEmployeeService {
 	@Autowired
 	private AirlineEmployeeRepository AERepo;
 	
-	public List<AirlineEmployee> findByEmployeeId(int id){
-		return AERepo.findByEmployeeId(id);
-	}
+//	AIRLINE SIDE
 	
 	public List<AirlineEmployee> findByAirlineId(int id){
 		return AERepo.findByAirlineId(id);
+	}
+	
+	public List<AirlineEmployeeDTO> findByArlineIdWithDTO(int id){
+		return AERepo.findByAirlineIdWithDTO(id);
 	}
 	
 	public Page<AirlineEmployee> findAllEmployeesByAirlineIdPaginated(Pageable pageable, int id){
@@ -30,6 +33,12 @@ public class AirlineEmployeeService {
 	
 	public List<AirlineEmployee> findCurrentEmployeesByAirlineId(int id){
 		return AERepo.findCurrentEmployeesByAirlineId(id);
+	}
+	
+//	EMPLOYEE SIDE
+	
+	public List<AirlineEmployee> findByEmployeeId(int id){
+		return AERepo.findByEmployeeId(id);
 	}
 	
 //	this one sucks needs specific query
