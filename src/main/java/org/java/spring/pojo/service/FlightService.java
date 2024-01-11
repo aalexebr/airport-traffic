@@ -1,5 +1,6 @@
 package org.java.spring.pojo.service;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import org.java.spring.pojo.db.Employee;
@@ -37,5 +38,25 @@ public class FlightService {
 	
 	public Page<Flight> findFlightsByDepAirportCity(Pageable page, String city){
 		return flightRepo.searchFlightByAirportDepCityPaginated(page,city);
+	}
+	
+	public List<Flight> findFlightsByDepDate(LocalDate date){
+		return flightRepo.searchFlightByAirportDepDate(date);
+	}
+	
+	public Page<Flight> findFlightsByDepDatePaginated(Pageable page, LocalDate date){
+		return flightRepo.searchFlightByAirportDepDatePaginated(page, date);
+	}
+	
+	public List<Flight> findFlightsByArrivalDate(LocalDate date){
+		return flightRepo.searchFlightByAirportArrivaleDate(date);
+	}
+	
+	public Page<Flight> findFlightsByArrDatePaginated(Pageable page, LocalDate date){
+		return flightRepo.searchFlightByAirportArrDatePaginated(page, date);
+	}
+	
+	public List<Flight> searchByCityAndDepDate(String name, LocalDate date){
+		return flightRepo.searchByDepCityAndDepDate(name,date);
 	}
 }

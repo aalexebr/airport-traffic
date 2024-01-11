@@ -26,7 +26,7 @@ public interface AirlineEmployeeRepository extends JpaRepository<AirlineEmployee
 	@Query("SELECT p FROM AirlineEmployee p WHERE p.airline.id = :id AND p.layoff_date IS NULL ")
 	List<AirlineEmployee> findCurrentEmployeesByAirlineId(@Param("id") int id);
 	
-//	using DTO to remove airline column
+//	using DTO to remove airline column to retrieve employees
 	@Query("SELECT new org.java.spring.pojo.restDTO.AirlineEmployeeDTO(p.id, p.employee, p.hiring_date, p.layoff_date) "
 			+ "FROM AirlineEmployee p "
 			+ "WHERE p.airline.id = :id "
