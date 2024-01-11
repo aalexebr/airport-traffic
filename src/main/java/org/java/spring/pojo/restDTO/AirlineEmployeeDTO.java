@@ -19,6 +19,7 @@ public class AirlineEmployeeDTO {
     	setHiring_date(hiring_date);
     	setLayoff_date(layoff_date);
     }
+    
 	public Integer getId() {
 		return id;
 	}

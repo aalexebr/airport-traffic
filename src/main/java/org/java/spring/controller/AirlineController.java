@@ -44,11 +44,12 @@ public class AirlineController {
 		return new ResponseEntity<>(x, HttpStatus.OK);
 	}
 	
-	@GetMapping("airline-employees/{id}")
-	public ResponseEntity<List<AirlineEmployee>> getCurrentEmployeesByAirlineId(@PathVariable int id){
-		List<AirlineEmployee> x = airlineEmployeeService.findCurrentEmployeesByAirlineId(id);
-		return new ResponseEntity<>(x, HttpStatus.OK);
-	}
+//	deprecated
+//	@GetMapping("airline-employees/{id}")
+//	public ResponseEntity<List<AirlineEmployee>> getCurrentEmployeesByAirlineId(@PathVariable int id){
+//		List<AirlineEmployee> x = airlineEmployeeService.findCurrentEmployeesByAirlineId(id);
+//		return new ResponseEntity<>(x, HttpStatus.OK);
+//	}
 	
 	@GetMapping("airline-employees-paginated/{id}")
 	public ResponseEntity<Page<AirlineEmployee>> getCurrentEmployeesByAirlineIdPaginated(@RequestParam(defaultValue = "0") int page,
@@ -58,9 +59,34 @@ public class AirlineController {
 		return new ResponseEntity<>(x, HttpStatus.OK);
 	}
 	
-	@GetMapping("test/{id}")
+	@GetMapping("airline-employees-all/{id}")
 	public ResponseEntity<List<AirlineEmployeeDTO>> getEmployeesByAirlineIdWithDTO(@PathVariable int id){
 		List<AirlineEmployeeDTO> x = airlineEmployeeService.findByArlineIdWithDTO(id);
+		return new ResponseEntity<>(x, HttpStatus.OK);
+	}
+	
+	@GetMapping("airline-employees-all-paginated/{id}")
+	public ResponseEntity<Page<AirlineEmployeeDTO>> getEmployeesByAirlineIdWithDTOPaginated(
+			@RequestParam(defaultValue = "0") int page,
+			@PathVariable int id){
+		Pageable pageable = PageRequest.of(page, 10); 
+		Page<AirlineEmployeeDTO> x = airlineEmployeeService.findByArlineIdWithDTOPaginated(pageable,id);
+		
+		return new ResponseEntity<>(x, HttpStatus.OK);
+	}
+	
+	@GetMapping("airline-employees-active/{id}")
+	public ResponseEntity<List<AirlineEmployeeDTO>> getActiveEmployeesByAirlineIdWithDTO(@PathVariable int id){
+		List<AirlineEmployeeDTO> x = airlineEmployeeService.findActiveEmployeesByAirlineIdWithDTO(id);
+		return new ResponseEntity<>(x, HttpStatus.OK);
+	}
+	
+	@GetMapping("airline-employees-active-paginated/{id}")
+	public ResponseEntity<Page<AirlineEmployeeDTO>> getActiveEmployeesByAirlineIdWithDTOPaginated(
+			@RequestParam(defaultValue = "0") int page,
+			@PathVariable int id){
+		Pageable pageable = PageRequest.of(page, 10); 
+		Page<AirlineEmployeeDTO> x = airlineEmployeeService.findActiveEmployeesByAirlineIdWithDTOPaginated(pageable,id);
 		return new ResponseEntity<>(x, HttpStatus.OK);
 	}
 }

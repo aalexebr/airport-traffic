@@ -27,12 +27,24 @@ public class AirlineEmployeeService {
 		return AERepo.findByAirlineIdWithDTO(id);
 	}
 	
+	public Page<AirlineEmployeeDTO> findByArlineIdWithDTOPaginated(Pageable pageable,int id){
+		return AERepo.findByAirlineIdWithDTOPaginated(pageable,id);
+	}
+	
 	public Page<AirlineEmployee> findAllEmployeesByAirlineIdPaginated(Pageable pageable, int id){
 		return AERepo.findByAirlineIdPaginated(pageable, id);
 	}
 	
 	public List<AirlineEmployee> findCurrentEmployeesByAirlineId(int id){
 		return AERepo.findCurrentEmployeesByAirlineId(id);
+	}
+	
+	public List<AirlineEmployeeDTO> findActiveEmployeesByAirlineIdWithDTO(int id){
+		return AERepo.findActiveEmployeesByAirlineIdWithDTO(id);
+	}
+	
+	public Page<AirlineEmployeeDTO> findActiveEmployeesByAirlineIdWithDTOPaginated(Pageable pageable,int id){
+		return AERepo.findActiveEmployeesByAirlineIdWithDTOPaginated(pageable,id);
 	}
 	
 //	EMPLOYEE SIDE
