@@ -7,6 +7,8 @@ import org.java.spring.pojo.db.Flight;
 import org.java.spring.pojo.db.Passenger;
 import org.java.spring.pojo.repo.FlightRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -25,5 +27,15 @@ public class FlightService {
 	
 	public List<Passenger> getFlightPassengers(int id){
 		return flightRepo.findPassengersByFlightId(id);
+	}
+	
+	// FLIGHT QUERIES
+	
+	public List<Flight> findFlightsByDepAirportCity(String city){
+		return flightRepo.searchFlightByAirportDepCity(city);
+	}
+	
+	public Page<Flight> findFlightsByDepAirportCity(Pageable page, String city){
+		return flightRepo.searchFlightByAirportDepCityPaginated(page,city);
 	}
 }
