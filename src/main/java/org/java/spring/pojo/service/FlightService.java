@@ -36,6 +36,10 @@ public class FlightService {
 		return flightRepo.searchFlightByAirportDepCity(city);
 	}
 	
+	public List<Flight> findFlightsByArrivalCity(String city){
+		return flightRepo.searchFlightByArrivalCity(city);
+	}
+	
 	public Page<Flight> findFlightsByDepAirportCity(Pageable page, String city){
 		return flightRepo.searchFlightByAirportDepCityPaginated(page,city);
 	}
@@ -58,5 +62,9 @@ public class FlightService {
 	
 	public List<Flight> searchByCityAndDepDate(String name, LocalDate date){
 		return flightRepo.searchByDepCityAndDepDate(name,date);
+	}
+	
+	public List<Flight> searchByArrCityAndArrDate(String name, LocalDate date){
+		return flightRepo.searchByArrCityAndArrDate(name,date);
 	}
 }

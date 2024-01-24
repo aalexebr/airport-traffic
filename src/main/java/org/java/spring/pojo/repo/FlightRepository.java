@@ -28,6 +28,9 @@ public interface FlightRepository extends JpaRepository<Flight, Integer>{
 	@Query("SELECT f FROM Flight f WHERE f.departureAirport.city LIKE %:name%")
 	List<Flight> searchFlightByAirportDepCity(@Param("name")String name);
 	
+	@Query("SELECT f FROM Flight f WHERE f.arrivalAirport.city LIKE %:name%")
+	List<Flight> searchFlightByArrivalCity(@Param("name")String name);
+	
 	@Query("SELECT f FROM Flight f WHERE f.departureAirport.city LIKE %:name%")
 	Page<Flight> searchFlightByAirportDepCityPaginated(Pageable pageable, @Param("name")String name);
 	
@@ -45,4 +48,13 @@ public interface FlightRepository extends JpaRepository<Flight, Integer>{
 	
 	@Query("SELECT f FROM Flight f WHERE f.departureAirport.city LIKE %:name% AND f.departure_datetime = :date")
 	List<Flight> searchByDepCityAndDepDate(@Param("name")String name,@Param("date")LocalDate date);
+	
+	@Query("SELECT f FROM Flight f WHERE f.departureAirport.city LIKE %:name% AND f.departure_datetime = :date")
+	Page<Flight> searchByDepCityAndDepDatePaginated(Pageable pageable,@Param("name")String name,@Param("date")LocalDate date);
+	
+	@Query("SELECT f FROM Flight f WHERE f.arrivalAirport.city LIKE %:name% AND f.arrival_datetime = :date")
+	List<Flight> searchByArrCityAndArrDate(@Param("name")String name,@Param("date")LocalDate date);
+	
+	@Query("SELECT f FROM Flight f WHERE f.arrivalAirport.city LIKE %:name% AND f.arrival_datetime = :date")
+	Page<Flight> searchByArrCityAndArrDatePaginated(Pageable pageable,@Param("name")String name,@Param("date")LocalDate date);
 }

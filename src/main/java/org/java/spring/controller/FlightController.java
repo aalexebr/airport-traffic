@@ -82,5 +82,30 @@ public class FlightController {
 		return new ResponseEntity<>(x, HttpStatus.OK);
 	}
 	
+	@GetMapping("search-arr-city-date")
+	public ResponseEntity<List<Flight>> searchArrCityDate(@RequestParam(required=false) String date,
+			@RequestParam(required=false) String city){
+
+	    if (city != null && date != null && date != "") {
+	        LocalDate d = LocalDate.parse(date);
+	        List<Flight> x = flightService.searchByArrCityAndArrDate(city, d);
+	        return new ResponseEntity<>(x, HttpStatus.OK);
+	    }
+
+	    if (city != null && date == null) {
+	        List<Flight> x = flightService.findFlightsByArrivalCity(city);
+	        return new ResponseEntity<>(x, HttpStatus.OK);
+	    }
+
+	    if (date != null) {
+	        LocalDate dateX = LocalDate.parse(date);
+	        List<Flight> x = flightService.findFlightsByArrivalDate(dateX);
+	        return new ResponseEntity<>(x, HttpStatus.OK);
+	    }
+
+	    return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		
+	}
+	
 
 }
