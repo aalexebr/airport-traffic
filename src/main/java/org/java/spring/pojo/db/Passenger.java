@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -26,10 +27,10 @@ public class Passenger {
 	
 	private String lastname;
 	
-	@JoinColumn(name = "date_of_birth")
+	@Column(name = "date_of_birth")
 	private LocalDate dateOfBirth;
 	
-	@JoinColumn(name = "tax_code")
+	@Column(name = "tax_code")
 	private String taxCode;
 	
 	@ManyToMany(mappedBy = "passengers")

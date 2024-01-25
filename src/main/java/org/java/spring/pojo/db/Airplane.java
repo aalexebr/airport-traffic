@@ -29,7 +29,7 @@ public class Airplane {
 	@JsonIgnore
 	private List<Flight> flights;
 	
-	@OneToMany
+	@OneToMany(mappedBy = "airplane")
 	@JsonIgnore
 	private List<MaintenanceJob> maintenanceJobs;
 	
@@ -79,6 +79,14 @@ public class Airplane {
 	public void setFlights(List<Flight> flights) {
 		this.flights = flights;
 	}
+	
+	public List<MaintenanceJob> getMaintenanceJobs() {
+		return maintenanceJobs;
+	}
+	public void setMaintenanceJobs(List<MaintenanceJob> maintenanceJobs) {
+		this.maintenanceJobs = maintenanceJobs;
+	}
+	
 	
 	
 }

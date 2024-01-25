@@ -140,4 +140,11 @@ public class TestController {
 		
 		return new ResponseEntity<>(a, HttpStatus.OK);
 	}
+	@GetMapping("maintenenceJobAirplaneList")
+	public ResponseEntity<List<MaintenanceJob>> getMJbyAirplaneID(){
+		
+		List<MaintenanceJob> a = MJService.getMJByAirplaneId(1);
+		
+		return new ResponseEntity<>(a, HttpStatus.OK);
+	}
 }
