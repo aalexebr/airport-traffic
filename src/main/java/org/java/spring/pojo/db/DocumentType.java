@@ -19,6 +19,7 @@ public class DocumentType {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@JsonIgnore
 	private Integer id;
 	
 	private String name;

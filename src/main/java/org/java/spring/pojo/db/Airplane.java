@@ -29,6 +29,10 @@ public class Airplane {
 	@JsonIgnore
 	private List<Flight> flights;
 	
+	@OneToMany
+	@JsonIgnore
+	private List<MaintenanceJob> maintenanceJobs;
+	
 	public Airplane() {}
 	public Airplane(String manufacturer,String model, Long seating_capacity) {
 		setManufacturer(manufacturer);

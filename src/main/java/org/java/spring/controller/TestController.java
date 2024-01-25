@@ -7,6 +7,7 @@ import org.java.spring.pojo.db.AirlineEmployee;
 import org.java.spring.pojo.db.Airplane;
 import org.java.spring.pojo.db.Employee;
 import org.java.spring.pojo.db.Flight;
+import org.java.spring.pojo.db.MaintenanceJob;
 import org.java.spring.pojo.db.Passenger;
 import org.java.spring.pojo.db.PassengerDocument;
 import org.java.spring.pojo.service.AirlineEmployeeService;
@@ -14,6 +15,7 @@ import org.java.spring.pojo.service.AirlineService;
 import org.java.spring.pojo.service.AirplaneService;
 import org.java.spring.pojo.service.EmployeeService;
 import org.java.spring.pojo.service.FlightService;
+import org.java.spring.pojo.service.MainteneceJobService;
 import org.java.spring.pojo.service.PassengerDocumentService;
 import org.java.spring.pojo.service.PassengerService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,6 +49,9 @@ public class TestController {
 	
 	@Autowired
 	PassengerDocumentService passDocService;
+	
+	@Autowired
+	MainteneceJobService MJService;
 
 	@GetMapping("airline_employee")
 	public ResponseEntity<List<AirlineEmployee>> getCurrentAirlineforEmployeeId(){
@@ -124,6 +129,14 @@ public class TestController {
 	public ResponseEntity<List<PassengerDocument>> getPassemgerDocument(){
 		
 		List<PassengerDocument> a = passDocService.findDocumentsOfPassengerById(2);
+		
+		return new ResponseEntity<>(a, HttpStatus.OK);
+	}
+	
+	@GetMapping("maintenenceJob")
+	public ResponseEntity<MaintenanceJob> getMJ(){
+		
+		MaintenanceJob a = MJService.findById(1);
 		
 		return new ResponseEntity<>(a, HttpStatus.OK);
 	}
