@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.java.spring.pojo.db.MaintenanceJob;
 import org.java.spring.pojo.repo.MaintenanceJobRepository;
+import org.java.spring.pojo.restDTO.AirplaneMaintenanceJobDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,7 +18,7 @@ public class MainteneceJobService {
 		return MJRepo.findById(id).orElse(null);
 	}
 	
-	public List<MaintenanceJob> getMJByAirplaneId(int id){
+	public List<AirplaneMaintenanceJobDTO> getMJByAirplaneId(int id){
 		return MJRepo.findByAirplaneId(id);
 	}
 }

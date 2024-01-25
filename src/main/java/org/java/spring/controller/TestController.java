@@ -10,6 +10,7 @@ import org.java.spring.pojo.db.Flight;
 import org.java.spring.pojo.db.MaintenanceJob;
 import org.java.spring.pojo.db.Passenger;
 import org.java.spring.pojo.db.PassengerDocument;
+import org.java.spring.pojo.restDTO.AirplaneMaintenanceJobDTO;
 import org.java.spring.pojo.service.AirlineEmployeeService;
 import org.java.spring.pojo.service.AirlineService;
 import org.java.spring.pojo.service.AirplaneService;
@@ -141,9 +142,9 @@ public class TestController {
 		return new ResponseEntity<>(a, HttpStatus.OK);
 	}
 	@GetMapping("maintenenceJobAirplaneList")
-	public ResponseEntity<List<MaintenanceJob>> getMJbyAirplaneID(){
+	public ResponseEntity<List<AirplaneMaintenanceJobDTO>> getMJbyAirplaneID(){
 		
-		List<MaintenanceJob> a = MJService.getMJByAirplaneId(1);
+		List<AirplaneMaintenanceJobDTO> a = MJService.getMJByAirplaneId(2);
 		
 		return new ResponseEntity<>(a, HttpStatus.OK);
 	}
